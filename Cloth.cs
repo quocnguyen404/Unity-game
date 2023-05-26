@@ -1,45 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-internal class Cloth : Item
+namespace Csharp
 {
-    public enum RATE
+    public class Cloth : Item
     {
-        Common = 1,
-        Uncommon,
-        Rare,
-        Mystery,
-    }
-    
-    
-    private RATE rate;
-    private int star;
+        public enum _Rarity
+        {
+            C = 1,
+            B,
+            A,
+            S,
+        }
 
-    public RATE Rate { get => rate; }
-    public int Star { get => star; }
+        protected int star;
+        protected _Rarity rarity;
 
+        public int Star { get => star; }
+        public _Rarity Rarity { get => rarity; }
 
-    public Cloth()
-    {
-        type = _Type.Cloth;
+        public override float Price => base.Price * Star * (float)Rarity;
 
-        Random random = new Random();
-        int RatioRate = random.Next(1, 100);
+        public Cloth()
+        {
+            star = GameUtilities.GetRandom(1, 5);
+            rarity = (_Rarity)GameUtilities.GetRandom(1, 4);
+        }
 
-        if (RatioRate <= 65) rate = RATE.Common;
-        if (RatioRate > 65 && RatioRate <= 85) rate = RATE.Uncommon;
-        if (RatioRate > 85 && RatioRate <= 95) rate = RATE.Rare;
-        if (RatioRate > 95) rate = RATE.Mystery;
+        public override void ShowInfor()
+        {
+            base.ShowInfor();
+            Console.WriteLine("Star: " + Star);
+            Console.WriteLine("Rarity: " + Rarity);
+        }
 
-        int RatioStar = random.Next(1, 5);
-        star = RatioStar;
-
-        price = price * star * (float)rate;
-    }
-
-    public override void ShowInfor()
-    {
-        base.ShowInfor();
-        Console.WriteLine("Rate: " + Rate);
-        Console.WriteLine("Star: " + Star);
     }
 }

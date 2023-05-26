@@ -1,42 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-internal class Weapon : Item
+namespace Csharp
 {
-    public enum QUALITY
+    public class Weapon : Item
     {
-        C = 1,
-        B,
-        A,
-        S,
-    }
+        public enum _Quality
+        {
+            Uncommon = 1,
+            Common,
+            Rare,
+            Lengedary,
+        }
 
-    private QUALITY quality;
-    private int level;
+        protected int level;
+        protected _Quality quality;
 
-    public QUALITY Quality { get => quality; }
-    public int Level { get => level;}
+        public int Level { get => level; }
+        public _Quality Quality { get => quality; }
 
-    public Weapon()
-    {
-        type = _Type.Weapon;
+        public override float Price => base.Price * Level * (float)Quality;
 
-        Random random = new Random();
-        int RatioQuality = random.Next(1, 100);
+        public Weapon()
+        {
+            quality = (_Quality)GameUtilities.GetRandom(1, 4);
+            level = GameUtilities.GetRandom(1, 5);
+        }
 
-        if (RatioQuality <= 65) quality = QUALITY.C;
-        if (RatioQuality > 65 && RatioQuality <= 85) quality = QUALITY.B;
-        if (RatioQuality > 85 && RatioQuality <= 95) quality = QUALITY.A;
-        if (RatioQuality > 95) quality = QUALITY.S;
+        public override void ShowInfor()
+        {
+            base.ShowInfor();
+            Console.WriteLine("Quality: " + Quality);
+            Console.WriteLine("Level: " + Level);
+        }
 
-        int RandomLevel = random.Next(1, 30);
-        level = RandomLevel;
-        price = price * level * (float)quality;
-    }
-
-    public override void ShowInfor()
-    {
-        base.ShowInfor();
-        Console.WriteLine("Quality: " + quality);
-        Console.WriteLine("Level: " + level);
     }
 }

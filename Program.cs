@@ -1,45 +1,36 @@
-﻿using System;
+﻿using Csharp;
+using System;
 
 class Program
 {
     static void Main()
     {
-        Random random = new Random();
+        Item[] tempItems = new Item[10];
 
-        Item[] items = new Item[10];
-        Item[] chest = new Item[32];
-
-        //generate items
-        for (int i = 0; i < 10; i++)
+        //generate 10 random items
+        for (int i = 0; i < tempItems.Length; i++)
         {
-            int ranType = random.Next(0, 1);
-            if (ranType == 0) 
-            { 
-                Item item = new Weapon();
-                item.Enter();
-                items[i] = item;
-            }
-            if (ranType == 1) 
-            {  
-                Item item = new Cloth(); 
-                item.Enter();
-                items[i] = item;
-            }
+            tempItems[i] = GameUtilities.GetRandomItem();
+            System.Threading.Thread.Sleep(100);
         }
 
-        //store chest
-        float SellPrice = 0;
-        for (int i = 0;i < 10;i++)
+        //show all random items
+        Console.WriteLine("RANDOM ITEMS LIST");
+        GameUtilities.ShowInfor(tempItems);
+        Console.WriteLine("-------------------");
+
+        Inventory inventory = new Inventory();
+
+        foreach (Item item in tempItems)
         {
-            if (items[i].Price > 10) chest[i] = items[i].Store();
-            if (items[i].Price < 10) SellPrice += items[i].Sell();
+            if (GameUtilities.CanStore(item))
+                inventory.StoreItem(item);
+            else
+                inventory.AddGold(item.Price);
         }
 
-        //sell all
-        float SellAll = 0;
-        foreach (Item item in chest)
-        {
-            SellAll += item.Sell();
-        }
+        Console.WriteLine("--------------");
+        Console.WriteLine("REMAIN ITEMS");
+        inventory.ShowAllItem();
     }
 }

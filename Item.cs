@@ -1,41 +1,27 @@
 ﻿using System;
 
-internal class Item
+public abstract class Item
 {
-    public enum _Type
-    {
-        Weapon,
-        Cloth,
-    }
-
+    protected int id;
     protected string name = "";
-    protected float price;
-    protected _Type type;
+    protected float price = GameUtilities.GetRandom(10, 15);
 
-    public string Name { get => name; set => name = value; }
-    public float Price { get => price; }
-    public _Type Type { get => type; }
+    public int itemID { get => id; }
+    public string Name { get => name; }
+    public virtual float Price { get => price; }
 
     public Item()
     {
-        Random random = new Random();
-        price = random.Next(1, 5);
+        id = GetHashCode();
+        name = GetType().Name + " " + "0" + " " + GameUtilities.GetRandom(0, 10);
     }
 
     public virtual void ShowInfor()
     {
+        Console.WriteLine("-------------------");
+        Console.WriteLine("Item ID: " + itemID);
         Console.WriteLine("Name: " + Name);
         Console.WriteLine("Price: " + Price);
-        Console.WriteLine("Type: " + Type);
     }
 
-    public Item Store() => this;
-    public float Sell() => Price;
-
-    public virtual void Enter()
-    {
-        Console.WriteLine(Type);
-        Console.Write("Enter item name: ");
-        Name = Console.ReadLine();
-    }
 }
