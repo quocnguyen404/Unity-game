@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Csharp
 {
-    public class Weapon : Item
+    public class Weapon : Item, IComparable<Weapon>
     {
         public enum _Quality
         {
-            Uncommon = 1,
-            Common,
+            Common = 1,
             Rare,
-            Lengedary,
+            Epic,
+            Legendary,
         }
 
         protected int level;
@@ -24,10 +19,26 @@ namespace Csharp
 
         public override float Price => base.Price * Level * (float)Quality;
 
+        public int CompareTo(Weapon other)
+        {
+            if (other == null)
+                return 1;
+
+            if (this.Quality > other.Quality)
+                return 1;
+            else if (this.Quality < other.Quality) 
+                return -1;
+            else
+            {
+                return this.Level.CompareTo(other.Level);
+            }
+        }
+
         public Weapon()
         {
             quality = (_Quality)GameUtilities.GetRandom(1, 4);
             level = GameUtilities.GetRandom(1, 5);
+            type = _Type.Weapon;
         }
 
         public override void ShowInfor()

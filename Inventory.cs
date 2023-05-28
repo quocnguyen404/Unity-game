@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,57 +9,83 @@ namespace Csharp
 {
     public class Inventory
     {
-        protected int capacity = 10;
-        protected int totalItem = 0;
-        protected float gold = 0;
+        private int capacity = 10;
+        private int totalItem;
+        protected float gold;
 
-        protected Item[] items;
+        private Dictionary<string, Item> items;
 
-        public Inventory() 
+        public float Gold { get => gold; }
+        public Dictionary<string, Item> Items { get => items; }
+
+        //constructor
+        public Inventory()
         {
             totalItem = 0;
             gold = 0;
-            items = new Item[capacity];
-        }
+            items = new Dictionary<string, Item>(capacity);
+        }//constructor
 
+        //Store item
         public void StoreItem(Item item)
         {
             if (totalItem >= 10)
                 return;
 
-            items[totalItem] = item;
-            totalItem++;
-        }
+            if (items.ContainsKey(item.Name))
+            {
+                AddGold(items[item.Name].Price);
+                items[item.Name] = item;
+            }
+            else
+            {
+                items.Add(item.Name, item);
+                totalItem++;
+            }
+        }//Store item
 
+        //Sell item
         public void SellItem(Item item)
         {
             if (totalItem <= 0)
                 return;
-            
-            for (int i = 0; i < items.Length; i++)
-            {
-                if (item.itemID == items[i].itemID)
-                {
-                    AddGold(item.Price);
-                    GameUtilities.RemoveItem(items, i);
-                }
-            }
-        }
 
+            if (items.ContainsKey(item.Name))
+            {
+                AddGold(item.Price);
+                items.Remove(item.Name);
+                totalItem--;
+            }
+            else return;
+        }//Sell item
+
+        //Sell Rare and Epic items
+        public void SellItem(Item item, bool condition)
+        {
+            if (!condition)
+                return;
+            else
+                SellItem(item);
+        }//Sell Rare and Epic items
+
+        //Add gold
         public void AddGold(float value)
         { gold += value; }
 
+        //Sort 
+        public void Sort()
+        {
+            items.ToList().Sort();
+        }//Sort
+
+        //Show all item
         public void ShowAllItem()
         {
-            foreach (Item item in items)
+            foreach (string key in items.Keys)
             {
-                if (item == null)
-                    continue;
-
-                item.ShowInfor();
+                items[key].ShowInfor();
             }
-
-        }
+        }//Show all item
 
     }
 }
