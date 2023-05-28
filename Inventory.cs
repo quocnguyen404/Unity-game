@@ -29,17 +29,19 @@ namespace Csharp
         //Store item
         public void StoreItem(Item item)
         {
+            //GameUtilities.ToDictionay(items, dictItems);
+
             if (totalItem >= 10)
                 return;
 
-            if (items.ContainsKey(item.Name))
+            if (Items.ContainsKey(item.Name))
             {
-                AddGold(items[item.Name].Price);
-                items[item.Name] = item;
+                AddGold(Items[item.Name].Price);
+                Items[item.Name] = item;
             }
             else
             {
-                items.Add(item.Name, item);
+                Items.Add(item.Name, item);
                 totalItem++;
             }
         }//Store item
@@ -50,10 +52,10 @@ namespace Csharp
             if (totalItem <= 0)
                 return;
 
-            if (items.ContainsKey(item.Name))
+            if (Items.ContainsKey(item.Name))
             {
                 AddGold(item.Price);
-                items.Remove(item.Name);
+                Items.Remove(item.Name);
                 totalItem--;
             }
             else return;
@@ -70,21 +72,34 @@ namespace Csharp
 
         //Add gold
         public void AddGold(float value)
-        { gold += value; }
+        { gold += value; } //Add gold
 
-        //Sort 
-        public void Sort()
-        {
-            items.ToList().Sort();
-        }//Sort
-
+        
         //Show all item
         public void ShowAllItem()
         {
-            foreach (string key in items.Keys)
+            List<Item> itemsList = GameUtilities.Sort(this.items);
+            itemsList.Sort();
+
+            List<Weapon> weaponList = new List<Weapon>();
+            List<Cloth> clothList = new List<Cloth>();
+
+            foreach (Item item in itemsList)
             {
-                items[key].ShowInfor();
+                if (item is Weapon)
+                    weaponList.Add(item as Weapon);
+                else
+                    clothList.Add(item as Cloth);
             }
+            weaponList.Sort();
+            clothList.Sort();
+
+
+            foreach (Weapon weapon in weaponList)
+                weapon.ShowInfor();
+
+            foreach (Cloth cloth in clothList)
+                cloth.ShowInfor();
         }//Show all item
 
     }

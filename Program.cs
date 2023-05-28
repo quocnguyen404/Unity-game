@@ -12,6 +12,14 @@ class Program
             tempItems.Add(GameUtilities.GetRandomItem());
         }
 
+        List<Weapon> weapons = new List<Weapon>();
+        //generate 10 weapon
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    Weapon weapon = new Weapon();
+        //    weapons.Add(weapon);
+        //}
+
         //show all random items
         Console.WriteLine("RANDOM ITEMS LIST");
         GameUtilities.ShowInfor(tempItems);
@@ -29,14 +37,13 @@ class Program
                 inventory.AddGold(item.Price);
         }
 
-        //Sell Epic and Rare weapons in inventory
-        foreach (string key in inventory.Items.Keys)
-        {
-            inventory.SellItem(inventory.Items[key], GameUtilities.IsEpicRare(inventory.Items[key]));
-        }
 
-        //Sort
-        inventory.Sort();
+        //Sell Epic and Rare weapons in inventory
+        //foreach (string key in inventory.Items.Keys)
+        //{
+        //    inventory.SellItem(inventory.Items[key], GameUtilities.IsEpicRare(inventory.Items[key]));
+        //}
+
 
         //Show all items in inventory
         Console.WriteLine();

@@ -10,6 +10,14 @@ public static class GameUtilities
         }
     }
 
+    public static void ShowInfor(List<Weapon> weapons)
+    {
+        foreach (Weapon weapon in weapons)
+        {
+            weapon.ShowInfor();
+        }
+    }
+
     public static int GetRandom(int min, int max)
     {
         Random random = new Random();
@@ -54,6 +62,32 @@ public static class GameUtilities
 
         return condition;
     }
+
+    //Sort
+    public static List<Item> Sort(Dictionary<string, Item> items)
+    {
+        List<Item> itemsList = new List<Item>(items.Values);
+        return itemsList;
+    }//Sort
+
+
+    //public static void ToDictionay(List<Item> items, Dictionary<string, Item> dictItems)
+    //{
+    //    foreach (Item item in items)
+    //        dictItems[item.Name] = item;
+    //}
+
+    //public static Dictionary<string, Item> ToDictionary(List<Item> items)
+    //{
+    //    Dictionary<string, Item> inventory = new Dictionary<string, Item>();
+    //    foreach (Item item in items)
+    //    {
+    //        inventory.Add(item.Name, item);
+    //    }
+
+    //    return inventory;
+    //}
+
     //public static void SellEpicAndRare(Inventory inventory)
     //{
     //    Dictionary<string, Item> Items = inventory.Items;
@@ -78,7 +112,7 @@ public static class GameUtilities
     //public static Item[] RemoveItem(Item[] arr, int index)
     //{
     //    Item[] newArr = new Item[arr.Length - 1];
-        
+
     //    for (int i = 0; i < arr.Length - 1; i++)
     //    {
     //        if (i < index)

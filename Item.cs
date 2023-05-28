@@ -20,12 +20,12 @@ public class Item : IComparable<Item>
 
     public int CompareTo(Item other)
     {
-        if (other == null) return 1;
+        if (other == null) return -1;
 
         if (this.Type > other.Type)
-            return 1;
-        else if (this.Type < other.Type)
             return -1;
+        else if (this.Type < other.Type)
+            return 1;
         else
             return 0;
     }

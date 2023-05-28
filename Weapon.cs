@@ -22,15 +22,14 @@ namespace Csharp
         public int CompareTo(Weapon other)
         {
             if (other == null)
-                return 1;
-
-            if (this.Quality > other.Quality)
-                return 1;
-            else if (this.Quality < other.Quality) 
                 return -1;
+            if (this.Quality > other.Quality)
+                return -1;
+            else if (this.Quality < other.Quality)
+                return 1;
             else
             {
-                return this.Level.CompareTo(other.Level);
+                return -this.Level.CompareTo(other.Level);
             }
         }
 
