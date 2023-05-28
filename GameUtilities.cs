@@ -57,7 +57,8 @@ public static class GameUtilities
         }
 
         return CanStore;
-    }// CAN STORE CONDITION
+    }
+    // CAN STORE CONDITION
 
     // check weapon quality is Epic or Rare
     public static bool IsEpicRare(Item item)
@@ -87,7 +88,7 @@ public static class GameUtilities
     //Sorting inventory
     public static void SortInventory(Dictionary<string, Item> items)
     {
-        List<Item> itemsList = GameUtilities.ConvertDictToList(items);
+        List<Item> itemsList = ConvertDictToList(items);
         itemsList.Sort();
 
         List<Weapon> weaponList = new List<Weapon>();
@@ -116,6 +117,7 @@ public static class GameUtilities
             count++;
         }
     }
+    //Sort inventory
 
 
 

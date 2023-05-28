@@ -22,12 +22,7 @@ public class Item : IComparable<Item>
     {
         if (other == null) return -1;
 
-        if (this.Type > other.Type)
-            return -1;
-        else if (this.Type < other.Type)
-            return 1;
-        else
-            return 0;
+        return -this.Type.CompareTo(other.Type);
     }
 
     public Item()
