@@ -2,6 +2,7 @@ using Csharp;
 
 public static class GameUtilities
 {
+
     public static void ShowInfor(List<Item> items)
     {
         foreach (Item item in items) 
@@ -10,6 +11,7 @@ public static class GameUtilities
         }
     }
 
+    //show infor of List<Weapon>
     public static void ShowInfor(List<Weapon> weapons)
     {
         foreach (Weapon weapon in weapons)
@@ -17,13 +19,17 @@ public static class GameUtilities
             weapon.ShowInfor();
         }
     }
+    //show infor of List<Weapon>
 
+    //Get random value
     public static int GetRandom(int min, int max)
     {
         Random random = new Random();
         return random.Next(min, max);
     }
+    //Get random value
 
+    //Get random item
     public static Item GetRandomItem()
     {
         int ranNum = GetRandom(0, 100);
@@ -33,7 +39,12 @@ public static class GameUtilities
         else
             return new Cloth();
     }
+    //Get random item
 
+    //CAN STORE CONDITION
+    //store new item
+    // item that exist in inventory --> can't store
+    // if it's price greater than item's price already in inventory --> can store
     public static bool CanStore(Item item, Dictionary<string, Item> Items)
     {
         bool CanStore = true;
@@ -46,8 +57,9 @@ public static class GameUtilities
         }
 
         return CanStore;
-    }
+    }// CAN STORE CONDITION
 
+    // check weapon quality is Epic or Rare
     public static bool IsEpicRare(Item item)
     {
         bool condition = false;
@@ -62,13 +74,49 @@ public static class GameUtilities
 
         return condition;
     }
+    // check weapon quality is Epic or Rare
 
-    //Sort
-    public static List<Item> Sort(Dictionary<string, Item> items)
+    //Convert Dictionary to List
+    public static List<Item> ConvertDictToList(Dictionary<string, Item> items)
     {
         List<Item> itemsList = new List<Item>(items.Values);
         return itemsList;
-    }//Sort
+    }
+    //Convert Dictionary to List
+
+    //Sorting inventory
+    public static void SortInventory(Dictionary<string, Item> items)
+    {
+        List<Item> itemsList = GameUtilities.ConvertDictToList(items);
+        itemsList.Sort();
+
+        List<Weapon> weaponList = new List<Weapon>();
+        List<Cloth> clothList = new List<Cloth>();
+
+        foreach (Item item in itemsList)
+        {
+            if (item is Weapon)
+                weaponList.Add(item as Weapon);
+            else
+                clothList.Add(item as Cloth);
+        }
+
+        weaponList.Sort();
+        clothList.Sort();
+
+        itemsList.Clear();
+
+        itemsList.AddRange(weaponList);
+        itemsList.AddRange(clothList);
+
+        int count = 0;
+        foreach (string key in items.Keys)
+        {
+            items[key] = itemsList[count];
+            count++;
+        }
+    }
+
 
 
     //public static void ToDictionay(List<Item> items, Dictionary<string, Item> dictItems)

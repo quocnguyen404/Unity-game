@@ -12,7 +12,7 @@ class Program
             tempItems.Add(GameUtilities.GetRandomItem());
         }
 
-        List<Weapon> weapons = new List<Weapon>();
+        //List<Weapon> weapons = new List<Weapon>();
         //generate 10 weapon
         //for (int i = 0; i < 10; i++)
         //{
