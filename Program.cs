@@ -37,7 +37,6 @@ class Program
                 inventory.AddGold(item.Price);
         }
 
-
         //Sell Epic and Rare weapons in inventory
         //foreach (string key in inventory.Items.Keys)
         //{
@@ -50,6 +49,8 @@ class Program
         Console.WriteLine("REMAIN ITEMS");
         inventory.ShowAllItem();
         Console.WriteLine();
+
+        //Show gold
         Console.WriteLine("Gold: " + inventory.Gold);
     }
 }
