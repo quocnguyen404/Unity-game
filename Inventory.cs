@@ -88,6 +88,5 @@ namespace Csharp
                 items[key].ShowInfor();
 
         }//Show all item
-
     }
 }
