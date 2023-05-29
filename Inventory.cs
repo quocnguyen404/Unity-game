@@ -83,7 +83,7 @@ namespace Csharp
         //Show all item
         public void ShowAllItem()
         {
-            GameUtilities.SortInventory(items);
+            //GameUtilities.SortInventory(items);
             foreach (string key in items.Keys)
                 items[key].ShowInfor();
 

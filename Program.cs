@@ -43,12 +43,20 @@ class Program
         //    inventory.SellItem(inventory.Items[key], GameUtilities.IsEpicRare(inventory.Items[key]));
         //}
 
+        ItemComparer compare = new ItemComparer();
+
+        List<Item> items = GameUtilities.ConvertDictToList(inventory.Items);
+
+        items.Sort(compare);
 
         //Show all items in inventory
-        Console.WriteLine();
+        //Console.WriteLine();
         Console.WriteLine("REMAIN ITEMS");
-        inventory.ShowAllItem();
-        Console.WriteLine();
+        //inventory.ShowAllItem();
+        //Console.WriteLine();
+
+        foreach (Item item in items)
+            item.ShowInfor();
 
         //Show gold
         Console.WriteLine("Gold: " + inventory.Gold);

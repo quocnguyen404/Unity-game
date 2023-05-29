@@ -89,7 +89,6 @@ public static class GameUtilities
     public static void SortInventory(Dictionary<string, Item> items)
     {
         List<Item> itemsList = ConvertDictToList(items);
-        itemsList.Sort();
 
         List<Weapon> weaponList = new List<Weapon>();
         List<Cloth> clothList = new List<Cloth>();
@@ -118,7 +117,6 @@ public static class GameUtilities
         }
     }
     //Sort inventory
-
 
 
     //public static void ToDictionay(List<Item> items, Dictionary<string, Item> dictItems)

@@ -25,19 +25,16 @@ public class ItemComparer : IComparer<Item>
                 Cloth? cloth1 = item1 as Cloth;
                 Cloth? cloth2 = item2 as Cloth;
 
-                if (cloth1 != null)
-                {
-                    int CRarity = cloth1.Rarity.CompareTo(cloth2?.Rarity);
+                int CRarity = cloth1.Rarity.CompareTo(cloth2?.Rarity);
 
-                    if (CRarity == 0)
-                        CRarity = cloth1.Star.CompareTo(cloth2?.Star);
+                if (CRarity == 0)
+                    CRarity = cloth1.Star.CompareTo(cloth2?.Star);
 
-                    returnValue = CRarity;
-                }
+                returnValue = CRarity;
             }
         }
 
-        return returnValue;
+        return -returnValue;
     }
 }
 
