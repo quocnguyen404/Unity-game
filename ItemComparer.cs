@@ -9,11 +9,15 @@ public class ItemComparer : IComparer<Item>
         if (returnValue == 0)
         {
             Weapon? weapon1 = item1 as Weapon; //downcast
-            Weapon? weapon2 = item2 as Weapon; //downcast
 
-            if (weapon1 != null)
+            if (/*item1 is Weapon*/weapon1 != null)
             {
+                Weapon? weapon2 = item2 as Weapon; //downcast
+
                 int CQuality = weapon1.Quality.CompareTo(weapon2.Quality);
+                
+                // use is to check for the downcast --> ((Weapon)item1).Quality.CompareTo(...)
+                //int CQuality = ((Weapon)item1).Quality.CompareTo(((Weapon)item2).Quality);
 
                 if (CQuality == 0)
                     CQuality = weapon1.Level.CompareTo(weapon2.Level);
