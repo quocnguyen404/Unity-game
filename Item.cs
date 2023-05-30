@@ -18,7 +18,7 @@ public class Item : IComparable<Item>
     public virtual float Price { get => price; }
     public _Type Type { get => type; }
 
-    public int CompareTo(Item other)
+    public int CompareTo(Item? other)
     {
         if (other == null) return -1;
 

@@ -8,8 +8,8 @@ public class ItemComparer : IComparer<Item>
 
         if (returnValue == 0)
         {
-            Weapon? weapon1 = item1 as Weapon;
-            Weapon? weapon2 = item2 as Weapon;
+            Weapon? weapon1 = item1 as Weapon; //downcast
+            Weapon? weapon2 = item2 as Weapon; //downcast
 
             if (weapon1 != null)
             {
@@ -22,8 +22,8 @@ public class ItemComparer : IComparer<Item>
             }
             else
             {
-                Cloth? cloth1 = item1 as Cloth;
-                Cloth? cloth2 = item2 as Cloth;
+                Cloth? cloth1 = item1 as Cloth; //downcast
+                Cloth? cloth2 = item2 as Cloth; //downcast
 
                 int CRarity = cloth1.Rarity.CompareTo(cloth2?.Rarity);
 
@@ -33,7 +33,6 @@ public class ItemComparer : IComparer<Item>
                 returnValue = CRarity;
             }
         }
-
         return -returnValue;
     }
 }

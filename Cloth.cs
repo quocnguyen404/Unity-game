@@ -11,10 +11,11 @@ namespace Csharp
             Eternal,
         }
 
-        public int CompareTo(Cloth other)
+        public int CompareTo(Cloth? other)
         {
             if (other == null) 
                 return -1;
+
             if (this.Rarity > other.Rarity)
                 return -1;
             else if (this.Rarity < other.Rarity)

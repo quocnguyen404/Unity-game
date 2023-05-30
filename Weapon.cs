@@ -19,10 +19,11 @@ namespace Csharp
 
         public override float Price => base.Price * Level * (float)Quality;
 
-        public int CompareTo(Weapon other)
+        public int CompareTo(Weapon? other)
         {
             if (other == null)
                 return -1;
+
             if (this.Quality > other.Quality)
                 return -1;
             else if (this.Quality < other.Quality)
