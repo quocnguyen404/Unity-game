@@ -118,6 +118,18 @@ public static class GameUtilities
     }
     //Sort inventory
 
+    public static void ShowLine(int length)
+    {
+        for(int i = 0; i < length; i++)
+            Console.Write("-");
+        Console.WriteLine();
+    }
+
+    public static string FirstName(string name)
+    {
+        return name.Split()[0];
+    }
+
 
     //public static void ToDictionay(List<Item> items, Dictionary<string, Item> dictItems)
     //{

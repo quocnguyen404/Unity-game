@@ -12,53 +12,8 @@ class Program
             tempItems.Add(GameUtilities.GetRandomItem());
         }
 
-        //List<Weapon> weapons = new List<Weapon>();
-        //generate 10 weapon
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Weapon weapon = new Weapon();
-        //    weapons.Add(weapon);
-        //}
+        GameUIManager UIMenu = new GameUIManager();
 
-        //show all random items
-        Console.WriteLine("RANDOM ITEMS LIST");
-        GameUtilities.ShowInfor(tempItems);
-        Console.WriteLine("");
-
-        //Create inventory
-        Inventory inventory = new Inventory();
-
-        //Store Item
-        foreach (Item item in tempItems)
-        {
-            if (GameUtilities.CanStore(item, inventory.Items))
-                inventory.StoreItem(item);
-            else
-                inventory.AddGold(item.Price);
-        }
-
-        //Sell Epic and Rare weapons in inventory
-        //foreach (string key in inventory.Items.Keys)
-        //{
-        //    inventory.SellItem(inventory.Items[key], GameUtilities.IsEpicRare(inventory.Items[key]));
-        //}
-
-        ItemComparer compare = new ItemComparer();
-
-        List<Item> items = GameUtilities.ConvertDictToList(inventory.Items);
-
-        items.Sort(compare);
-
-        //Show all items in inventory
-        //Console.WriteLine();
-        Console.WriteLine("REMAIN ITEMS");
-        //inventory.ShowAllItem();
-        //Console.WriteLine();
-
-        foreach (Item item in items)
-            item.ShowInfor();
-
-        //Show gold
-        Console.WriteLine("Gold: " + inventory.Gold);
+        UIMenu.ShowMenu();
     }
 }
